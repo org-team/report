@@ -1,4 +1,4 @@
-package com.demo.service;
+package com.demo.user.service;
 
 import com.utils.Msg;
 

@@ -1,18 +1,18 @@
-package com.demo.controller;
-
-import com.demo.service.IUserService;
-import com.utils.JsonUtil;
-import com.utils.Msg;
-import com.utils.SetSqlId;
-import com.utils.TypeIsNull;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+package com.demo.user.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.demo.common.controller.BaseController;
+import com.demo.user.service.IUserService;
+import com.utils.JsonUtil;
+import com.utils.Msg;
+import com.utils.SetSqlId;
+import com.utils.TypeIsNull;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.demo.po;
+package com.demo.user.po;
 
 public class User {
     private Integer id;

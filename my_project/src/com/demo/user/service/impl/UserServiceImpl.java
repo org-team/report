@@ -1,15 +1,15 @@
-package com.demo.service.impl;
-
-import com.demo.dao.UserMapper;
-import com.demo.service.IUserService;
-import com.utils.Msg;
-
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
+package com.demo.user.service.impl;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.demo.user.dao.UserMapper;
+import com.demo.user.service.IUserService;
+import com.utils.Msg;
 
 /**
  * @author: zhangKangChuang

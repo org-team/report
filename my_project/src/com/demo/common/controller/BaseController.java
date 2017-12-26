@@ -1,22 +1,22 @@
-package com.demo.controller;
+package com.demo.common.controller;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.demo.po.User;
+import com.demo.user.po.User;
 
 
 import com.alibaba.fastjson.JSON;
+
 /**
  * @author: zhangKangChuang
- * package: com.demo.controller
+ * package: com.demo.common.controller
  * class_name: BaseController
  * describe: <p>每个controller都应该继承baseController,减少代码复杂度 ,
  * 在开发过程中依据业务指向待完善</p>
  * email: 996789881@qq.com
- * @data: 2017/12/26 0026 上午 11:05
- **/
-
+ * @data: 2017年12月26日 下午10:12:03
+ */
 public abstract class BaseController {
 
 	/**
