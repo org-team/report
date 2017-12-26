@@ -37,9 +37,9 @@ public class UserController extends BaseController {
             msg = this.userService.queryUserId();
         }catch (Exception e){
             msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
-            logger.error("=====selectTest=====" + e);
+            logger.error("类-selectTest报错-: " + e);
         }
-        logger.error("=====selectTest=====" + JsonUtil.toJson(msg));
+        logger.error("类-selectTest-返回-: " + JsonUtil.toJson(msg));
         this.send(response,msg);
     }
 
@@ -57,9 +57,9 @@ public class UserController extends BaseController {
             }
         }catch (Exception e){
             msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
-            logger.error("=====example=====" + e);
+            logger.error("类-example报错-: " + e);
         }
-        logger.error("=====example=====" + JsonUtil.toJson(msg));
+        logger.error("类-example-返回-: " + JsonUtil.toJson(msg));
         this.send(response,msg);
     }
     
@@ -71,9 +71,9 @@ public class UserController extends BaseController {
             msg=this.userService.insertUserId(SetSqlId.GetUuid());
         }catch (Exception e){
             msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
-            logger.error("=====insertUserId=====" + e);
+            logger.error("类-insertUserId-报错: " + e);
         }
-        logger.error("=====insertUserId=====" + JsonUtil.toJson(msg));
+        logger.error("类-insertUserId-返回-: " + JsonUtil.toJson(msg));
         this.send(response,msg);
     }
 }
