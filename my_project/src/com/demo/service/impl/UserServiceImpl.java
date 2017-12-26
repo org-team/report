@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService  {
     public Msg queryUserId() {
         Msg msg;
         List<Map<String,Object>> lst=this.userMapper.selectUserId();
-        if(null==lst && lst.isEmpty()){
+        if(null==lst || lst.isEmpty()){
             //查询无结果
             msg=new Msg(Msg.NULL,Msg.NULL_MSG);
         }else{
