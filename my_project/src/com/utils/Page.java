@@ -1,93 +1,94 @@
 package com.utils;
-
 import java.io.Serializable;
 
-public class Page implements Serializable {
+public class Page
+	implements Serializable
+{
 
-	/**
-	 * int start=(page.getCurPage()-1)*page.getPageCount()+1;
-	 * int end  = (page.getCurPage()-1)*page.getPageCount() + page.getPageCount();
-	 */
 	private static final long serialVersionUID = 1L;
-
-	// 当前第几页 从0开始
 	private Integer curPage;
-	// 一共多少页
 	private Integer maxPage;
-	// 数据总数
 	private int totalRecord;
-	// 每页多少数据
 	private int pageCount;
-	
-	private int pageNumEnd;
-	private int pageNumBegin;
+	private int filterRecord;
+	private boolean needPading;
 
-	public Page() {
-		this.curPage = Integer.valueOf(1);
-		this.pageCount = 10;
+	public Page()
+	{
+		curPage = Integer.valueOf(1);
+		pageCount = 10;
+		needPading = true;
 	}
 
-	public int getPageNumEnd() {
-		this.pageNumEnd = (this.getCurPage()-1)*this.getPageCount() + this.getPageCount();
-		return pageNumEnd;
+	public Integer getCurPage()
+	{
+		return curPage;
 	}
 
-	public void setPageNumEnd(int pageNumEnd) {
-		this.pageNumEnd = pageNumEnd;
-	}
-
-	public int getPageNumBegin() {
-		this.pageNumBegin = (this.getCurPage()-1)*this.getPageCount()+1; 
-		return pageNumBegin;
-	}
-
-	public void setPageNumBegin(int pageNumBegin) {
-		this.pageNumBegin = pageNumBegin;
-	}
-
-	public Integer getCurPage() {
-		return this.curPage;
-	}
-
-	public void setCurPage(Integer curPage) {
-		if (curPage.intValue() < 1) {
+	public void setCurPage(Integer curPage)
+	{
+		if (curPage.intValue() < 1)
 			this.curPage = Integer.valueOf(1);
-		} else if ((this.maxPage != null)
-				&& (this.maxPage.intValue() < curPage.intValue())) {
-			this.curPage = this.maxPage;
-		} else {
+		else
+		if (maxPage != null && maxPage.intValue() < curPage.intValue())
+			this.curPage = maxPage;
+		else
 			this.curPage = curPage;
-		}
+		if (maxPage != null)
+			filterRecord = (this.curPage.intValue() - 1) * pageCount;
 	}
 
-	public Integer getMaxPage() {
-		return this.maxPage;
+	public Integer getMaxPage()
+	{
+		return maxPage;
 	}
 
-	public void setMaxPage(Integer maxPage) {
+	public void setMaxPage(Integer maxPage)
+	{
 		if (maxPage.intValue() > 0)
 			this.maxPage = maxPage;
-		else {
+		else
 			this.maxPage = Integer.valueOf(1);
-		}
+		if (curPage != null)
+			filterRecord = (curPage.intValue() - 1) * pageCount;
+		needPading = false;
 	}
 
-	public Integer getTotalRecord() {
-		return Integer.valueOf(this.totalRecord);
+	public Integer getTotalRecord()
+	{
+		return Integer.valueOf(totalRecord);
 	}
 
-	public void setTotalRecord(Integer totalRecord) {
+	public void setTotalRecord(Integer totalRecord)
+	{
 		this.totalRecord = totalRecord.intValue();
-		setMaxPage(Integer.valueOf((totalRecord.intValue() - 1)
-				/ this.pageCount + 1));
+		setMaxPage(Integer.valueOf((totalRecord.intValue() - 1) / pageCount + 1));
+		if (curPage != null && maxPage != null)
+			filterRecord = (curPage.intValue() - 1) * pageCount;
 	}
 
-	public Integer getPageCount() {
-		return Integer.valueOf(this.pageCount);
+	public Integer getPageCount()
+	{
+		return Integer.valueOf(pageCount);
 	}
 
-	public void setPageCount(Integer pageCount) {
+	public void setPageCount(Integer pageCount)
+	{
 		this.pageCount = pageCount.intValue();
 	}
 
+	public Integer getFilterRecord()
+	{
+		return Integer.valueOf(filterRecord);
+	}
+
+	public void setNeedPading(boolean needPading)
+	{
+		this.needPading = needPading;
+	}
+
+	public boolean needQueryPading()
+	{
+		return needPading;
+	}
 }

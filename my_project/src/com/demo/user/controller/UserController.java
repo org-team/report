@@ -1,6 +1,7 @@
 package com.demo.user.controller;
 
 import javax.annotation.Resource;
+import javax.jws.soap.SOAPBinding.Use;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
@@ -8,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.demo.common.controller.BaseController;
+import com.demo.user.po.User;
 import com.demo.user.service.IUserService;
 import com.utils.JsonUtil;
 import com.utils.Msg;
+import com.utils.Page;
 import com.utils.SetSqlId;
 import com.utils.TypeIsNull;
 
@@ -31,10 +34,11 @@ public class UserController extends BaseController {
     private IUserService userService;
 
     @RequestMapping("/selectTest")
-    public void selectTest(HttpServletResponse response) {
+    public void selectTest(User u,HttpServletResponse response) {
         Msg msg;
         try {
-            msg = this.userService.queryUserId();
+        	u.setPage(new Page());
+            msg = this.userService.queryUserId(u);
         }catch (Exception e){
             msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
             logger.error("类-selectTest报错-: " + e);
@@ -45,7 +49,7 @@ public class UserController extends BaseController {
 
 
     @RequestMapping("/example")
-    public void example(String name,Integer age,HttpServletResponse response) {
+    public void example(String name,Integer age,User u,HttpServletResponse response) {
         Msg msg;
         try {
             //null==name || "".equals(name) || null==age || "".equals(age)
@@ -53,7 +57,7 @@ public class UserController extends BaseController {
                 //参数异常
                 msg=new Msg(Msg.ERROR,Msg.ERROR_MSG);
             }else{
-                msg = this.userService.queryUserId();
+                msg = this.userService.queryUserId(u);
             }
         }catch (Exception e){
             msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);

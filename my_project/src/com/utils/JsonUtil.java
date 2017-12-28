@@ -72,7 +72,7 @@ public class JsonUtil {
     public static Object toBean(String className, String json) {
         JSONObject obj = JSONObject.fromObject(json);
 
-        Class c = null;
+        Class<?> c = null;
         try {
             c = Class.forName(className);
         } catch (ClassNotFoundException e1) {

@@ -1,7 +1,11 @@
 package com.demo.user.po;
 
-public class User {
-    private Integer id;
+import com.utils.BaseModel;
+
+public class User extends BaseModel {
+   
+	private static final long serialVersionUID = 1L;
+	private Integer id;
 
     public Integer getId() {
         return id;

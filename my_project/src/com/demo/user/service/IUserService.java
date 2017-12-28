@@ -1,5 +1,6 @@
 package com.demo.user.service;
 
+import com.demo.user.po.User;
 import com.utils.Msg;
 
 
@@ -12,7 +13,7 @@ import com.utils.Msg;
  * @data: 2017/12/26 0026 上午 10:26
  **/
 public interface IUserService {
-    Msg queryUserId();
+    Msg queryUserId(User u);
     
     Msg insertUserId(String id);
     

@@ -1,5 +1,6 @@
 package com.demo.user.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.demo.user.dao.UserMapper;
+import com.demo.user.po.User;
 import com.demo.user.service.IUserService;
 import com.utils.Msg;
 
@@ -26,14 +28,19 @@ public class UserServiceImpl implements IUserService  {
 
 
     @Override
-    public Msg queryUserId() {
+    public Msg queryUserId(User u) {
         Msg msg;
-        List<Map<String,Object>> lst=this.userMapper.selectUserId();
+        List<Map<String,Object>> lst=this.userMapper.selectUserId_paging(u);
         if(null==lst || lst.isEmpty()){
             //查询无结果
             msg=new Msg(Msg.NULL,Msg.NULL_MSG);
         }else{
-            msg=new Msg(Msg.SUCCESS,Msg.SUCCESS_MSG,lst);
+            Map<String, Object> map=new HashMap<String, Object>();
+            
+            map.put("lst", lst);
+            map.put("page", u.getPage());
+            
+            msg=new Msg(Msg.SUCCESS,Msg.SUCCESS_MSG,map);
         }
         return msg;
     }
