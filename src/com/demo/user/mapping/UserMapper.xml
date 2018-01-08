@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.user.dao.UserMapper">
+<!--如果要用对象传取值 "com.demo.po.User"-->
+	<select id="selectUserId_paging" resultType="Map" parameterType="com.demo.user.po.User">
+	  SELECT id from t_user
+	</select>
+
+	<insert id="insertUserId" parameterType="String">  
+	    insert into t_user (id) values (#{id})
+	</insert>  
+
+</mapper>
