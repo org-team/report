@@ -1,0 +1,22 @@
+package com.manager.user.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import com.manager.user.po.User;
+
+
+public interface UserManagerMapper {
+    /**
+     * 查询用户id
+     * @return
+     */
+    List<Map<String,Object>> selectUserId_paging(User user);
+    
+    /**
+     * 插入uuid
+     * @param id
+     * @return
+     */
+    int insertUserId(String id);
+}
