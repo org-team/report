@@ -12,4 +12,4 @@
 //var path = "http://10.10.5.161:8080/operation"; 
 
 
-var path = "http://localhost:8080/operation"; 
+var path = "http://localhost:8080/my_project"; 
