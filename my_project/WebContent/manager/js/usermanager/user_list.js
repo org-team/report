@@ -8,7 +8,6 @@ var crd_params = null;
  */
 function serviceList(start,limit){
 	$("#user_List").empty();
-//	alert(path + "/servers/selectServicelistPage");
 	$.ajax({
         url : path + "/usermanager/selectUserInfo_paging.action",
         type :"POST",
@@ -116,9 +115,11 @@ function isDelete(){
 }
 
 /**
- * 回显权限 
+ * 设置权限,回显权限 
+ * @param isPass
  */
-$(function(){
+function quXianService(){
+	openModule("../page/usermanager/quanXian_user.html",{},{},{},"");
 	$.ajax({
         url : path + "/usermanager/showRoleList.action",
         type :"POST",
@@ -130,7 +131,7 @@ $(function(){
         	console.log(data.data);
         	var trHtml="";
         	$.each(data.data, function(i, item) {
-        		trHtml +="<option value='"+item.ROLE_ID+"'>'"+item.ROLE_NAME+"'</option>"
+        		trHtml +="<option value='"+item.ROLE_ID+"'>"+item.ROLE_NAME+"</option>"
         	});
         	$("#quanxian_roleId").html(trHtml);
         },
@@ -138,15 +139,6 @@ $(function(){
         	$.alert({text:"网络异常,请稍后重试!"});
         }
 	});
-});
-
-/**
- * 设置权限
- * @param isPass
- */
-
-function quXianService(){
-	openModule("../page/usermanager/quanXian_user.html",{},{},{},"");
 }
 $(document).on('click','#isQuanXian',function(){
 	var userId = $("input[name=rad]:checked").val();
@@ -185,9 +177,6 @@ $(document).on('click','#isQuanXian',function(){
 function showModel(){
 	openModule("../page/usermanager/add_user.html",{},{},{},"");
 }
-
-
-
 $(document).on('click','#saves',function(){
 	alert($('#add_sex option:selected').val());
 	//设置一个对象来控制是否进入AJAX过程

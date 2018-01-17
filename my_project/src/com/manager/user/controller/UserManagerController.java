@@ -46,10 +46,10 @@ public class UserManagerController extends BaseController {
      * @param response
      */
     @RequestMapping("/selectUserInfo_paging")
-    public void selectUserInfo_paging(UserDetail u,HttpServletResponse response) {
+    public void selectUserInfo_paging(UserDetail u,Page page,HttpServletResponse response) {
         Msg msg;
         try {
-        	u.setPage(new Page());
+        	u.setPage(page);
             msg = this.userManagerService.selectUserInfo_paging(u);
         }catch (Exception e){
             msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);

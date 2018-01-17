@@ -264,6 +264,7 @@ $(document).on('click','#saves',function(){
   * @param count
   */
   function selectProjectTopage(num,count) {
+	  alert(num+"------"+count)
   	if (null == num || "" == num || isNaN(parseInt(num))) {
   		alert("请输入数字");
    		return;
