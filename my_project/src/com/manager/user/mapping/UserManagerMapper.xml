@@ -18,9 +18,9 @@
 			DATE_FORMAT(P.CREATE_TIME,'%Y-%m-%d %H:%i:%s') CREATE_TIME,
 			R.ROLE_NAME
 		FROM
-			T_YC_USER C
-				LEFT JOIN T_YC_PROFILE P ON P.USER_ID=C.USER_ID
-				LEFT JOIN T_YC_ROLE R ON R.ROLE_ID=P.ROLE_ID
+			t_yc_user C
+				LEFT JOIN t_yc_profile P ON P.USER_ID=C.USER_ID
+				LEFT JOIN t_yc_role R ON R.ROLE_ID=P.ROLE_ID
 		<where> C.VALID=1 
 	        <if test=" null != userName and '' != userName">  
 	            AND C.USER_NAME=#{userName}
@@ -40,10 +40,10 @@
 	
 	<!-- 后台手动添加用户 -->
 	<insert id="insertUser_1" parameterType="com.manager.user.po.UserDetail">  
-	    INSERT INTO T_YC_USER (user_id,user_name,password,valid,type) VALUES(#{userId},#{userName},#{password},1,1)
+	    INSERT INTO t_yc_user (user_id,user_name,password,valid,type) VALUES(#{userId},#{userName},#{password},1,1)
 	</insert>  
 	<insert id="insertUser_2" parameterType="com.manager.user.po.UserDetail">  
-		INSERT INTO T_YC_PROFILE (
+		INSERT INTO t_yc_profile (
 			user_id,
 			nick_name,
 			role_id,
