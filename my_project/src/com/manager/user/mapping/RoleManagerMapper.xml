@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.user.dao.RoleManagerMapper">
+
+	<!-- 权限信息列表-分页 -->
+	<select id="selectRoleInfo_paging" parameterType="com.manager.user.po.UserDetail" resultType="Map">
+		select c.role_id,c.role_name from t_yc_role c where c.valid=1
+	</select>
+	
+	<!-- 后台管理员新增一条权限 -->
+	<insert id="insertRole" parameterType="com.manager.user.po.UserDetail">  
+	    insert into t_yc_role(role_id,role_name,valid) values(#{roleId},#{roleName},1)
+	</insert>  
+	
+	<!-- 去重权限名称 -->
+	<select id="isExistRoleName" parameterType="String" resultType="Integer">
+		select count(c.role_name) role_name from t_yc_role c where c.valid=1 and c.role_name=#{roleName};
+	</select>
+	
+	<!-- 删除权限记录根据权限id -->
+	<update id="deleteRoleByRoleId" parameterType="String">
+		update t_yc_role c set c.valid=2 where c.role_id=#{roleId}
+	</update>
+	
+</mapper>

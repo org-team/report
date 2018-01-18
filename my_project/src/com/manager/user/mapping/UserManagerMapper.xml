@@ -57,9 +57,6 @@
 		VALUES
 			(#{userId},#{nickName},#{roleId},#{sex},#{age},#{phone},#{email},1,sysdate(),sysdate())
 	</insert>  
-	<!-- <insert id="insertUser_3" parameterType="com.manager.user.po.UserDetail">  
-	    INSERT INTO T_YC_ROLE(role_id,role_name,valid) VALUES(#{roleId},#{roleName},1)
-	</insert> -->  
 	
 	<!-- 用户登录名去重 -->
 	<select id="isExistUserName" parameterType="String" resultType="Integer">
@@ -78,7 +75,7 @@
 	
 	<!-- 回显权限分类 -->
 	<select id="showRoleList" resultType="Map">
-		select c.ROLE_ID,c.ROLE_NAME from t_yc_role c
+		select c.ROLE_ID,c.ROLE_NAME from t_yc_role c where c.valid=1
 	</select>
 
 </mapper>
