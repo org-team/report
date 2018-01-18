@@ -4,12 +4,12 @@
 
 	<!-- 权限信息列表-分页 -->
 	<select id="selectRoleInfo_paging" parameterType="com.manager.user.po.UserDetail" resultType="Map">
-		select c.role_id,c.role_name from t_yc_role c where c.valid=1
+		select c.role_id,c.role_name,date_format(c.create_time,'%Y-%m-%d %H:%i:%s') create_time from t_yc_role c where c.valid=1
 	</select>
 	
 	<!-- 后台管理员新增一条权限 -->
 	<insert id="insertRole" parameterType="com.manager.user.po.UserDetail">  
-	    insert into t_yc_role(role_id,role_name,valid) values(#{roleId},#{roleName},1)
+	    insert into t_yc_role(role_id,role_name,valid,create_time) values(#{roleId},#{roleName},1,sysdate())
 	</insert>  
 	
 	<!-- 去重权限名称 -->

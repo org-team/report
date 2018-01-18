@@ -70,7 +70,7 @@ function searchService(){
 }
 
 /**
- * 删除服务器
+ * 删除用户
  * @param isPass
  */
 
@@ -178,7 +178,6 @@ function showModel(){
 	openModule("../page/usermanager/add_user.html",{},{},{},"");
 }
 $(document).on('click','#saves',function(){
-	alert($('#add_sex option:selected').val());
 	//设置一个对象来控制是否进入AJAX过程
 	var post_flag = false; 
 	 //如果正在提交则直接返回，停止执行
@@ -249,6 +248,27 @@ $(document).on('blur','#add_userName',function(){
 	});	
 });
 
+$(function(){
+	$.ajax({
+        url : path + "/usermanager/showRoleList.action",
+        type :"POST",
+        xhrFields: {
+	        withCredentials: true
+	    },
+        dataType :"json",
+        success : function (data) {
+        	console.log(data.data);
+        	var trHtml="";
+        	$.each(data.data, function(i, item) {
+        		trHtml +="<option value='"+item.ROLE_ID+"'>"+item.ROLE_NAME+"</option>"
+        	});
+        	$("#roleId").html("<option> </option>"+trHtml);
+        },
+        error: function (data){
+        	$.alert({text:"网络异常,请稍后重试!"});
+        }
+	});
+});
 
  /*************************************************以下是页面布局,样式js无需关注******************************************************************/ 
  
@@ -266,14 +286,6 @@ $(document).on('blur','#add_userName',function(){
   	serviceList(num,(count?count:15));
    }
   
-  /**
-   * 查看投诉详情
-   * @param id
-   */
- function showComplainDetail(content){
- 	crd_params = content;
- 	openModule("../page/complaint/complain_detail.html",{},{},{},"");
- }
   /**
    * tr 选中事件
    */

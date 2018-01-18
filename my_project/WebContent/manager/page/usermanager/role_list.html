@@ -15,7 +15,7 @@
 				<li><a href="#">Home</a></li>
 				<li><a href="#">4S店售后网上零配件采购系统</a></li>
 				<li><a href="#">用户管理</a></li>
-				<li class="active">用户列表</li>
+				<li class="active">权限列表</li>
 			</ol>
 		</div>
 	</div>
@@ -36,45 +36,15 @@
 								</div>
 							</header>
 							<div class="info-select clearfix dataTable-info">
-								<form class="form-inline" id="crd_form_query">
-									
-									<div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
-	                                    <label>
-	                                    	<p>登录名： </p>
-	                                        <input class="form-control inputElem" type="text" name="" id="userName" >
-	                                    </label>
-	                                </div>
-	                                <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
-	                                    <label>
-	                                    	<p>手机号：</p>
-	                                        <input class="form-control inputElem" type="text" name="" id="phone" >
-	                                    </label>
-	                                </div>
-                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
-	                                    <label>
-	                                    	<p>权限：</p>
-	                                        <select class="form-control" id="roleId" name="">
-                                             </select>
-	                                    </label>
-	                                 </div>
-									
-									<div class="row">
-										<div class="col-xs-12">
-											<button type="button" class="btn btn-default btn-sm fr mr20" onclick="searchService()">查询</button>
-										</div>
-									</div>
-								</form>
+								
 							</div>
 							
 							<div class="panel-heading panel-new">
                             	<button class="btn btn-sm btn-default" type="button" onclick="showModel()">
-                                 	<span class="glyphicon glyphicon-ok"></span>手动添加用户
+                                 	<span class="glyphicon glyphicon-ok"></span>添加用户权限
                                 </button> 
                                 <button class="btn btn-sm btn-default" type="button" onclick="deleteService()">
-                                 	<span class="glyphicon glyphicon-remove"></span>删除用户
-                                </button> 
-                                <button class="btn btn-sm btn-default" type="button" onclick="quXianService()">
-                                 	<span class="glyphicon glyphicon-ok"></span>设置权限
+                                 	<span class="glyphicon glyphicon-remove"></span>删除权限
                                 </button> 
                             </div>				
 							<!--列表开始-->
@@ -84,22 +54,18 @@
 										<tr>
 											<th></th>
 											<th>序号</th>
-											<th>登录名</th>
-											<th>昵称</th>
-											<th>性别</th>
-											<th>邮箱</th>
-											<th>电话</th>
-											<th>权限</th>
+											<th>权限序列码</th>
+											<th>权限名称</th>
 											<th>创建时间</th>
 										</tr>
 									</thead>
-									<tbody id="user_List">
+									<tbody id="role_List">
 									</tbody>
 								</table>
 							</div>
 							<!--列表结束-->
 							<!--分页-->
-							<div class="pagination pagination-sm" id="userListPaging">
+							<div class="pagination pagination-sm" id="roleListPaging">
 							</div>
 						</div>
 					</div>
@@ -113,7 +79,7 @@
 	</div>
 	
 	<script type="text/javascript" src="/my_project/manager/js/common/path.js"></script>
-	<script type="text/javascript" src="/my_project/manager/js/usermanager/user_list.js"></script>
+	<script type="text/javascript" src="/my_project/manager/js/usermanager/role_list.js"></script>
 	
 	<script>
 		$(function() {

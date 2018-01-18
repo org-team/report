@@ -21,13 +21,10 @@ import com.utils.TypeIsNull;
 
 
 /**
- * @author: zhangKangChuang
- * package: com.demo.controller
- * class_name: UserController
- * describe: 测试代码 url: /zkc/test.action
- * email: 996789881@qq.com
- * @data: 2017/12/26 0026 上午 11:02
- **/
+ * <p>Description:用户管理模块 </p>
+ * <p>Title: UserManagerController.java</p>
+ * @date 2018年1月18日
+ */
 @Controller
 @RequestMapping("/usermanager")
 public class UserManagerController extends BaseController {
