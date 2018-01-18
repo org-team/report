@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.zy_lv{color:green;}
+.zy_hong{color:red;}
+</style>
+</head>
+<body>
+	<div class="row">
+		<div class="col-lg-12">
+			<ol class="page-header breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">4S店售后网上零配件采购系统</a></li>
+				<li><a href="#">用户管理</a></li>
+				<li class="active">用户列表</li>
+			</ol>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="dataTable_wrapper">
+						<div class="dataTable-info">
+							<header>
+								<h4>查询</h4>
+								<!--表单显示及隐藏-->
+								<div class="drop-on">
+									<span><i class="glyphicon glyphicon-chevron-up"></i></span>
+								</div>
+								<div class="drop-down">
+									<span><i class="glyphicon glyphicon-chevron-down"></i></span>
+								</div>
+							</header>
+							<div class="info-select clearfix dataTable-info">
+								<form class="form-inline" id="crd_form_query">
+									
+									<div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+	                                    <label>
+	                                    	<p>登录名： </p>
+	                                        <input class="form-control inputElem" type="text" name="" id="userName" >
+	                                    </label>
+	                                </div>
+	                                <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+	                                    <label>
+	                                    	<p>手机号：</p>
+	                                        <input class="form-control inputElem" type="text" name="" id="phone" >
+	                                    </label>
+	                                </div>
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+	                                    <label>
+	                                    	<p>角色名称：</p>
+	                                        <select class="form-control" id="roleId" name="">
+                                            	<option value="">全部</option>
+                                                <option value="1">普通用户</option>
+                                                <option value="2">会员</option>
+                                                <option value="3">管理员</option>
+                                             </select>
+	                                    </label>
+	                                 </div>
+									
+									<div class="row">
+										<div class="col-xs-12">
+											<button type="button" class="btn btn-default btn-sm fr mr20" onclick="searchService()">查询</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							
+							<div class="panel-heading panel-new">
+                            	<button class="btn btn-sm btn-default" type="button" onclick="showModel()">
+                                 	<span class="glyphicon glyphicon-ok"></span>手动添加用户
+                                </button> 
+                                <button class="btn btn-sm btn-default" type="button" onclick="deleteService()">
+                                 	<span class="glyphicon glyphicon-remove"></span>删除用户
+                                </button> 
+                                <button class="btn btn-sm btn-default" type="button" onclick="quXianService()">
+                                 	<span class="glyphicon glyphicon-ok"></span>设置权限
+                                </button> 
+                            </div>				
+							<!--列表开始-->
+							<div class="panel-content table-responsive tab-content">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th></th>
+											<th>序号</th>
+											<th>登录名</th>
+											<th>昵称</th>
+											<th>性别</th>
+											<th>邮箱</th>
+											<th>电话</th>
+											<th>权限</th>
+											<th>创建时间</th>
+										</tr>
+									</thead>
+									<tbody id="user_List">
+									</tbody>
+								</table>
+							</div>
+							<!--列表结束-->
+							<!--分页-->
+							<div class="pagination pagination-sm" id="userListPaging">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--列表结束-->
+	<!--分页-->
+	<div class="pagination pagination-sm" id="complainListPaging">
+	</div>
+	
+	<script type="text/javascript" src="/my_project/manager/js/common/path.js"></script>
+	<script type="text/javascript" src="/my_project/manager/js/usermanager/user_list.js"></script>
+	
+	<script>
+		$(function() {
+			/*提示框*/
+			$(function() {
+				$('[data-toggle="tooltip"]').tooltip()
+			})
+			/*loading*/
+			$('#shclDefault').shCircleLoader();
+			/*tab栏选择*/
+			tabx(".tab-item", ".main")
+			/*表单合并*/
+			drop(".drop-on", ".drop-down", ".info-select");
+			/*Tab栏滑动*/
+			tabs(".mytabs-wrap");
+			/*邮箱验证*/
+			$(function() {
+				new EmailAutoComplete({})
+			});
+			/*表格点击行高亮*/
+			trColor("#crd_comPlain_List > tr");
+			/*阻止冒泡*/
+			$("#complainListPaging > tr input[type=radio]").click(function(event) {
+				event.stopPropagation();
+			});
+			/*表格单选*/
+			radioColor("#radio_tbody > tr");
+			
+		});
+	</script>
+</body>
+</html>
