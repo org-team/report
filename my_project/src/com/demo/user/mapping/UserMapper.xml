@@ -1,13 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.user.dao.UserMapper">
-<!--如果要用对象传取值 "com.demo.po.User"-->
-	<select id="selectUserId_paging" resultType="Map" parameterType="com.demo.user.po.User">
-	  SELECT id from t_user
+	<!-- 在用户表插入数据 -->
+	<select id="insertUser" parameterType="User">
+		insert into t_yc_user 
+			(user_id,user_name,password) 
+		values 
+			(#{user_id},#{user_name},#{password})
 	</select>
-
-	<insert id="insertUserId" parameterType="String">  
-	    insert into t_user (id) values (#{id})
-	</insert>  
-
+	
+	<!-- 在用户详情表插入数据 -->
+	<insert id="insertProfile" parameterType="User">  
+	    insert into t_yc_profile 
+	    	(
+	    		user_id,
+	    		nick_name,
+	    		role_id,
+	    		user_img,
+	    		sex,
+	    		age,
+	    		address_id,
+	    		address_detail,
+	    		postcode,
+	    		phone,
+	    		email,
+	    		create_time,
+	    		update_time
+	    	) 
+	    values 
+	    	(
+	    		#{user_id},
+	    		#{nick_name},
+	    		(SELECT role_id FROM t_yc_role WHERE role_name = '普通用户'),
+	    		#{user_img},
+	    		#{sex},
+	    		#{age},
+	    		#{address_id},
+	    		#{address_detail},
+	    		#{postcode},
+	    		#{phone},
+	    		#{email},
+	    		#{create_time},
+	    		#{update_time}
+	    	)
+	</insert> 
+	
+	<!-- 查询用户登录信息 -->
+	<select id="selectUser" resultType="User" parameterType="String">
+		select 
+			u.user_id,u.user_name,u.password 
+		from 
+			t_yc_user u 
+		where 
+			u.user_name = #{user_name} 
+		and 
+			u.valid = 1
+	</select> 
+	
+	<!-- 查询用户详细信息 -->
+	<select id="selectProfile" resultType="User" parameterType="String">
+		select 
+			p.user_id,p.nick_name,r.role_name,p.user_img,p.sex,p.age,p.address_id,p.address_detail,p.postcode,p.phone,p.email
+		from 
+			t_yc_profile p, t_yc_role r
+		where 
+			p.user_id = #{user_id}
+		and 
+			p.role_id = r.role_id
+	</select> 
+	
+	<!-- 修改密码 -->
+	<update id="updateUser" parameterType="User">
+		update t_yc_user set password = #{password} where user_id = #{user_id}
+	</update>
+	
+	<!-- 修改个人信息 -->
+	<update id="updateProfile" parameterType="User">
+		update 
+			t_yc_profile
+		set 
+			nick_name = #{nick_name},
+    		user_img = #{user_img},
+    		sex = #{sex},
+    		age = #{age},
+    		address_id = #{address_id},
+    		address_detail = #{address_detail},
+    		postcode = #{postcode},
+    		phone = #{phone},
+    		email = #{email},
+    		verson = (SELECT t.verson + 1 FROM (SELECT * FROM t_yc_profile WHERE user_id = #{user_id}) t),
+    		update_time = #{update_time}
+		where 
+			user_id = #{user_id}
+	</update>
 </mapper>
