@@ -1,21 +1,45 @@
 package com.demo.user.dao;
 
-import java.util.List;
-import java.util.Map;
-
 import com.demo.user.po.User;
 
 public interface UserMapper {
-    /**
-     * 查询用户id
-     * @return
+   
+	/**
+     * 插入用户登录信息
+     * @param user
      */
-    List<Map<String,Object>> selectUserId_paging(User user);
+	public void insertUser(User user);
     
     /**
-     * 插入uuid
-     * @param id
-     * @return
+     * 插入用户详细信息
+     * @param user
      */
-    int insertUserId(String id);
+	public void insertProfile(User user);
+	
+	/***
+	 * 根据用户名查询用户登录信息，只返回user_id,user_name
+	 * @param user_name
+	 * @return
+	 */
+	public User selectUser(String user_name);
+	
+	/***
+	 * 根据用户id查询用户登录信息，返回用户详细信息
+	 * @param user_id
+	 * @return
+	 */
+	public User selectProfile(String user_id);
+	
+	/**
+	 * 修改用户密码
+	 * @param user
+	 */
+	public void updateUser(User user);
+	
+	/**
+	 * 修改个人信息
+	 * @param user
+	 */
+	public void updateProfile(User user);
+
 }

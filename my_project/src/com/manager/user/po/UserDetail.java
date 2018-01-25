@@ -273,8 +273,5 @@ public class UserDetail extends BaseModel {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	
-	
-	
 
 }

@@ -5,16 +5,43 @@ import com.utils.Msg;
 
 
 /**
- * @author: zhangKangChuang
- * package: com.demo.service
- * class_name: IUserService
- * describe: 查询用户id
- * email: 996789881@qq.com
- * @data: 2017/12/26 0026 上午 10:26
+ * 该接口用户封装关于用户的所有逻辑操作
  **/
 public interface IUserService {
-    Msg queryUserId(User u);
+     
+	/**
+	 * 用户信息注册
+	 * @param u
+	 * @return
+	 */
+	public Msg registUser(User u);
+	
+	/**
+	 * 用户登录
+	 * @return
+	 */
+	public Msg loginUser(String user_name,String password);
+	
+	/**
+	 * 查询用户详细信息
+	 * @param user_id
+	 * @return
+	 */
+    public Msg getUserDetail(String user_id);
     
-    Msg insertUserId(String id);
+    /**
+     * 修改密码
+     * @param user_name
+     * @param old_pwd
+     * @param new_pwd
+     * @return
+     */
+    public Msg changePassword(String user_name,String old_pwd,String new_pwd);
     
+    /**
+     * 修改个人信息
+     * @param user
+     * @return
+     */
+    public Msg changeUserDetail(User user);
 }
