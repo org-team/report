@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.demo.common.controller.BaseController;
+import com.manager.common.controller.BaseController;
 import com.manager.user.po.UserDetail;
 import com.manager.user.service.UserManagerService;
 import com.utils.JsonUtil;
