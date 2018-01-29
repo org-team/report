@@ -48,7 +48,7 @@ function serviceList(start,limit){
 }
 
 /**
- * 手动添加权限
+ * 手动添加商品
  */
 function insertProduct(){
 	openModule("../page/product/add_product.html",{},{},{},"");
@@ -61,20 +61,32 @@ $(document).on('click','#saves',function(){
     //标记当前状态为正在提交状态
     post_flag = true;
     $.ajax({
-		url : path + "/roleManager/addRole.action",
+		url : path + "/product/addProduct.action",
 	    type :"POST",
 	    xhrFields: {
 	        withCredentials: true
 	    },
 	    data:{
-	    	roleName:$("#add_roleName").val()
+	    	productName:$("#add_productName").val(),
+	    	kindId:$("#add_kindId").val(),
+	    	property:$("#add_property").val(),
+	    	productDescribe:$("#add_productDescribe").val(),
+	    	source: $('#add_source option:selected').val(),
+	    	model:$("#add_model").val(),
+	    	unit: $('#add_unit option:selected').val(),
+	    	priceOld:$("#add_priceOld").val(),
+	    	kindId: $('#add_kindId option:selected').val(),
+	    	total:$("#add_total").val(),
+	    	productImgMain:$("#add_productImgMain").val(),
+	    	productImgAssist:$("#add_productImgAssist").val(),
+	    	remark:$("#add_remark").val()
 	    },
 	    dataType :"json",
 	    success : function (data) {
 	    	post_flag =false; //在提交成功之后将标志标记为可提交状态
 	    	$.alert({text:data.message});
 	    	closeModule();
-	    	serviceList(1,15);
+	    	//serviceList(1,15);
 	    },
 	    error: function (data){
 	    	$.alert({text:"网络异常,请稍后重试!"});

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.user.dao.ProductManagerMapper">
+	
+	<!-- 添加商品 -->
+	<insert id="insertProduct_1" parameterType="com.manager.user.po.Product">
+		INSERT INTO t_yc_product (
+			product_id,
+			product_name,
+			source,
+			product_img_main,
+			product_img_assist,
+			product_describe,
+			kind_id,
+			remark,
+			verson,
+			valid,
+			create_time,
+			update_time)
+		VALUES
+			(#{productId},#{productName},#{source},#{productImgMain},#{productImgAssist},
+			 #{productDescribe},#{kindId},#{remark},1,1,sysdate(),sysdate())		
+	</insert>
+	<insert id="insertProduct_2" parameterType="com.manager.user.po.Property">
+		INSERT INTO t_yc_property (
+			product_id,
+			property_id,
+			property,
+			model,
+			price_old,
+			surplus,
+			total,
+			unit		
+		)
+		VALUES
+			(#{productId},#{propertyId},#{property},#{model},#{priceOld},#{total},#{total},#{unit})		
+	</insert>
+
+</mapper>

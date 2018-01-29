@@ -17,74 +17,81 @@
 					<div class="row mt12">
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">商品名称</label>
-							<input type="text" class="form-control" id="add_roleName">
+							<input type="text" class="form-control" id="add_productName">
 						</div>
 					
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">商品分类</label>
-							<input type="text" class="form-control" id="add_roleName">
+							<select class="form-control" id="add_kindId">
+								<option value="1">分类1</option>
+								<option value="2">分类2</option>
+								<option value="3">分类3</option>
+							</select>
 						</div>
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">商品属性</label>
-							<textarea type="text" class="form-control" id="add_roleName"></textarea>
+							<textarea  class="form-control" id="add_property"></textarea>
 						</div>
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">商品描述</label>
-							<textarea type="text" class="form-control" id="add_roleName"></textarea>
+							<textarea class="form-control" id="add_productDescribe"></textarea>
 						</div>
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">商品来源</label>
-							<select class="form-control" id="add_roleName">
-								<option>自营</option>
-								<option>联营</option>
-								<option>第三方</option>
+							<select class="form-control" id="add_source">
+								<option value="1">自营</option>
+								<option value="2">联营</option>
+								<option value="3">第三方</option>
 							</select>
 						</div>
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">商品型号</label>
-							<input type="text" class="form-control" id="add_roleName" placeholder="">
+							<input type="text" class="form-control" id="add_model" placeholder="">
 						</div>
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">最小单位</label>
-							<select class="form-control" id="add_roleName">
-								<option>斤/元</option>
-								<option>件/元</option>
-								<option>个/元</option>
+							<select class="form-control" id="add_unit">
+								<option value="1">斤/元</option>
+								<option value="2">件/元</option>
+								<option value="3">个/元</option>
 							</select>
 						</div>
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">商品价格</label>
-							<input type="text" class="form-control" id="add_roleName">
-						</div>
-						<div class="form-group  col-xs-6">
-							<label id="red_title" for="exampleInputEmail1">折扣比例</label>
-							<input type="text" class="form-control" id="add_roleName">
+							<input type="text" class="form-control" id="add_priceOld">
 						</div>
 						
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">商品库存</label>
-							<input type="text" class="form-control" id="add_roleName">
+							<input type="text" class="form-control" id="add_total">
 						</div>
 					
+						<div class="form-group  col-xs-6">
+							<label id="red_title" for="exampleInputEmail1">备注</label>
+							<input class="form-control" id="add_remark">
+						</div>
+						
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">主图图片</label>
 							<div class="file-loading">
 								<input id="file-es" name="attachs" type="file" multiple>
+								<input id="add_productImgMain" style="display: none"><!-- 图片上传成功之后返回的路径 -->
 							</div>
 						</div>
 						<div class="form-group  col-xs-6">
 							<label id="red_title" for="exampleInputEmail1">详情图片</label>
 							<div class="file-loading">
 								<input id="file-fr" name="attachs" type="file" multiple>
+								<input id="add_productImgAssist" style="display: none"><!-- 图片上传成功之后返回的路径 -->
 							</div>
 						</div>
+						
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-primary" id="saves">Save</button>
 				</div>
-				
 			</div>
 
 
@@ -93,19 +100,36 @@
 
 	</div>
 	<script>
-		$('#file-fr').fileinput({
-			theme : 'fa',
-			language : 'fr',
-			uploadUrl : path + '/file/upload.action',
-			allowedFileExtensions : [ 'jpg', 'png', 'gif' ]
-		});
 		$('#file-es').fileinput({
 			theme : 'fa',
 			language : 'es',
 			uploadUrl : path + '/file/upload.action',
 			allowedFileExtensions : [ 'jpg', 'png', 'gif' ]
+
+		}).on("filebatchselected", function(event, files) {
+			$(this).fileinput("upload");
+		}).on("fileuploaded", function(event, data) {
+			/* debugger; */
+			if (data.response.code == 1) {
+				console.log("回调函数:" + data.response.data);
+				$("#add_productImgMain").val(data.response.data);
+
+			}
 		});
-		
+		$('#file-fr').fileinput({
+			theme : 'fa',
+			language : 'fr',
+			uploadUrl : path + '/file/upload.action',
+			allowedFileExtensions : [ 'jpg', 'png', 'gif' ]
+		}).on("filebatchselected", function(event, files) {
+			$(this).fileinput("upload");
+		}).on("fileuploaded", function(event, data) {
+			/* debugger; */
+			if (data.response.code == 1) {
+				console.log("回调函数:" + data.response.data);
+				$("#add_productImgAssist").val(data.response.data);
+			}
+		});
 	</script>
 
 

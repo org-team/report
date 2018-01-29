@@ -44,6 +44,7 @@ public class FileController extends BaseController {
 		boolean flag = true;
 		// 定义文件保存的位置
 		String path = request.getSession().getServletContext().getRealPath("statics" + File.separator + "uploadfiles");
+		logger.info("定义文件保存的位置-: " + path);
 		// 循环读取文件信息
 		for (int i = 0; i < attachs.length; i++) {
 			MultipartFile attach = attachs[i];
@@ -81,7 +82,6 @@ public class FileController extends BaseController {
 					// 将上传的文件保存
 					try {
 						attach.transferTo(targetFile);
-						msg = new Msg(Msg.SUCCESS, "上传成功");
 					} catch (Exception e) {
 						e.printStackTrace();
 						msg = new Msg(Msg.FAIL, "上传失败");
@@ -91,8 +91,10 @@ public class FileController extends BaseController {
 					// 更新上传的路径
 					if (i == 0) {
 						wkpicpath = path + File.separator + fileName;
+						msg = new Msg(Msg.SUCCESS, "上传成功","/my_project/statics/uploadfiles/"+fileName);
 					} else if (i == 1) {
 						hdpicpath = path + File.separator + fileName;
+						msg = new Msg(Msg.SUCCESS, "上传成功","/my_project/statics/uploadfiles/"+fileName);
 					}
 				} else {
 					msg = new Msg(Msg.FAIL, "图片格式不正确");
@@ -100,7 +102,7 @@ public class FileController extends BaseController {
 				}
 			}
 		}
-		logger.error("类-upload-返回-: " + JsonUtil.toJson(msg));
+		logger.info("类-upload-返回-: " + JsonUtil.toJson(msg));
 		this.send(response, msg);
 
 	}
