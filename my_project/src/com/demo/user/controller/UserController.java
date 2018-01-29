@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +53,7 @@ public class UserController extends BaseController {
             msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
             logger.error("注册用户出错。。。" + e);
         }
-        logger.error("用户注册返回结果-: " + JsonUtil.toJson(msg));
+        logger.info("用户注册返回结果-: " + JsonUtil.toJson(msg));
         this.send(response,msg);
     }
 
@@ -81,7 +80,7 @@ public class UserController extends BaseController {
         	 msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
              logger.error("登录出错。。。" + e);
          }
-         logger.error("用户登录返回结果-: " + JsonUtil.toJson(msg));
+         logger.info("用户登录返回结果-: " + JsonUtil.toJson(msg));
          this.send(response,msg);
     }
     
@@ -109,7 +108,7 @@ public class UserController extends BaseController {
        	 	msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
             logger.error("修改密码出错。。。" + e);
         }
-        logger.error("修改密码返回结果-: " + JsonUtil.toJson(msg));
+        logger.info("修改密码返回结果-: " + JsonUtil.toJson(msg));
         this.send(response,msg);
     }
     
@@ -135,7 +134,7 @@ public class UserController extends BaseController {
        	 	msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
             logger.error("查询用户详细信息出错。。。" + e);
         }
-        logger.error("查询用户详细信息返回结果-: " + JsonUtil.toJson(msg));
+        logger.info("查询用户详细信息返回结果-: " + JsonUtil.toJson(msg));
         this.send(response,msg);
     }
     
@@ -161,7 +160,7 @@ public class UserController extends BaseController {
        	 	msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
             logger.error("修改用户信息出错。。。" + e);
         }
-        logger.error("修改用户信息返回结果-: " + JsonUtil.toJson(msg));
+        logger.info("修改用户信息返回结果-: " + JsonUtil.toJson(msg));
         this.send(response,msg);
     }
     
