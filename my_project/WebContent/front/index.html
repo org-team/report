@@ -102,8 +102,8 @@
 						  <li class="list_desc"><h4><a href="#">velit esse molestie</a></h4><span class="actual">1 x
                           $12.00</span></li>
 						  <div class="login_buttons">
-							 <div class="check_button" id="checkOut"><a href="checkout.html">Check out</a></div>
-							 <div class="login_button" id="login"><a href="login.html">Login</a></div>
+							 <div class="check_button" onclick="checkOut()"><a href="#">Check out</a></div>
+							 <div class="login_button"><a href="login.html">Login</a></div>
 							 <div class="clear"></div>
 						  </div>
 						  <div class="clear"></div>
@@ -324,17 +324,5 @@ var baseUrl=getRootPath_web();
 $(function(){
 	seeLogin();
 })
-//监控退出登录按钮
-function seeLogin(){
-	var token=localStorage.token;
-	if(token==null||token==""){
-		$("#checkOut").hide();
-		$("#login").show();	
-	}
-	else{
-		$("#checkOut").show();
-		$("#login").hide();	
-	}	
-}
 </script>
 </html>

@@ -1,4 +1,4 @@
-function loadjscssfile(filename, filetype) {
+﻿function loadjscssfile(filename, filetype) {
 	if (filetype == "js") { //判定文件类型
 		var fileref = document.createElement("script");//创建标签
 		fileref.setAttribute("type", "text/javascript");//定义属性type的值为text/javascript
@@ -24,4 +24,25 @@ function getRootPath_web() {
 	//获取带"/"的项目名，如：/uimcardprj
 	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 	return (localhostPaht + projectName);
+}
+//监控退出登录按钮
+function seeLogin(){
+	var token=localStorage.token;
+	if(token==null||token==""){
+		$(".check_button").hide();
+		$(".login_button").show();	
+	}
+	else{
+		$(".check_button").show();
+		$(".login_button").hide();	
+	}	
+}
+//退出登录
+function checkOut(){
+	var con;
+	con=confirm("您将要退出登录")
+	if(con==true){
+	localStorage.token="";
+	}
+	location.reload();
 }

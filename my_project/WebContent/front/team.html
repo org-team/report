@@ -113,7 +113,7 @@
 						  <li class="list_desc"><h4><a href="#">velit esse molestie</a></h4><span class="actual">1 x
                           $12.00</span></li>
 						  <div class="login_buttons">
-							 <div class="check_button"><a href="checkout.html">Check out</a></div>
+							 <div class="check_button" onclick="checkOut()"><a href="#">Check out</a></div>
 							 <div class="login_button"><a href="login.html">Login</a></div>
 							 <div class="clear"></div>
 						  </div>
@@ -273,4 +273,13 @@
 			</div>
 		</div>
 </body>	
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript">
+var baseUrl=getRootPath_web();
+//页面自加载方法
+$(function(){
+	seeLogin();
+})
+</script>
 </html>
