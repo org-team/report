@@ -12,4 +12,5 @@ public class SetSqlId {
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 		return uuid;
 	}
+	
 }
