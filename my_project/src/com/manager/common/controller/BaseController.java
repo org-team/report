@@ -1,7 +1,9 @@
 package com.manager.common.controller;
 import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.demo.user.po.User;
 
@@ -34,6 +36,27 @@ public abstract class BaseController {
 		return u;
 	}
 
+	
+	/**
+	 * 设置session
+	 * @Title: setManagerId  
+	 * @param request
+	 * @param managerId void
+	 * @throws
+	 */
+	protected String setManagerId(HttpServletRequest request ,String managerId){
+		String miManagerId = null;
+		try {
+			HttpSession session = request.getSession();
+			//miManagerId = MathUtil.encryptAsString(managerId,"jzcxxt@74521");
+			session.setAttribute("managerId",miManagerId);
+			System.out.println("setManagerId" + session.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return miManagerId;
+	}
+	
 	/**
 	 * 获取登陆用户的IP地址
 	 * @param request

@@ -77,5 +77,14 @@
 	<select id="showRoleList" resultType="Map">
 		select c.ROLE_ID,c.ROLE_NAME from t_yc_role c where c.valid=1
 	</select>
+	
+	<!-- 后台管理员登录 -->
+	<select id="managerLogin" parameterType="com.manager.user.po.UserDetail" resultType="com.manager.user.po.UserDetail">
+		SELECT c.user_id userId,c.user_name userName FROM  t_yc_user c
+		LEFT JOIN t_yc_profile d on c.user_id=d.user_id
+		LEFT JOIN t_yc_role e on e.role_id=d.role_id
+		WHERE e.role_id='31affdeca7e347f1a851fc453e453bcc' AND c.valid=1 
+		AND c.user_name=#{userName} AND c.password=#{password};
+	</select>
 
 </mapper>
