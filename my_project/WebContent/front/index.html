@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Free Snow Bootstrap Website Template | Home :  777模板</title>
+<title>4s汽车销售</title>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,9 +14,9 @@
 <link rel="stylesheet" href="css/fwslider.css" media="all">
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/fwslider.js"></script>
-	<script src="angularjs/1.2.22/angular.js"></script>
-
-<script type="text/javascript">
+<!-- 	<script src="angularjs/1.2.22/angular.js"></script>
+ -->
+<!-- <script type="text/javascript">
         $(document).ready(function() {
             $(".dropdown img.flag").addClass("flagvisibility");
 
@@ -46,8 +46,7 @@
                 $(".dropdown img.flag").toggleClass("flagvisibility");
             });
         });
-     </script>
-
+     </script> -->
 </head>
 <body ng-app="indexApp">
 	<div class="header">
@@ -103,8 +102,8 @@
 						  <li class="list_desc"><h4><a href="#">velit esse molestie</a></h4><span class="actual">1 x
                           $12.00</span></li>
 						  <div class="login_buttons">
-							 <div class="check_button"><a href="checkout.html">Check out</a></div>
-							 <div class="login_button"><a href="login.html">Login</a></div>
+							 <div class="check_button" id="checkOut"><a href="checkout.html">Check out</a></div>
+							 <div class="login_button" id="login"><a href="login.html">Login</a></div>
 							 <div class="clear"></div>
 						  </div>
 						  <div class="clear"></div>
@@ -317,14 +316,25 @@
 			</div>
 		</div>
 </body>	
-</html>
-
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
 <script type="text/javascript">
-    var app=angular.module('indexApp',[]);
-    app.controller('shopController',function ($scope,$http) {
-            $http.post('/user/getIndexImg.action',{}).success(function (response) {
-                alert(response);
-                $scope.results=response;
-            })
-    });
+var baseUrl=getRootPath_web();
+//页面自加载方法
+$(function(){
+	seeLogin();
+})
+//监控退出登录按钮
+function seeLogin(){
+	var token=localStorage.token;
+	if(token==null||token==""){
+		$("#checkOut").hide();
+		$("#login").show();	
+	}
+	else{
+		$("#checkOut").show();
+		$("#login").hide();	
+	}	
+}
 </script>
+</html>

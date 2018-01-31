@@ -70,11 +70,9 @@
 	    		  <!-- start search-->
 				   <div class="search-box">
 							<div id="sb-search" class="sb-search">
-								<form>
 									<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
 									<input class="sb-search-submit" type="submit" value="">
 									<span class="sb-icon-search"> </span>
-								</form>
 							</div>
 						</div>
 						<!----search-scripts---->
@@ -112,7 +110,6 @@
      <div class="main">
       <div class="shop_top">
 	     <div class="container">
-						<form> 
 								<div class="register-top-grid">
 										<h3>用户信息</h3>
 										<div>
@@ -144,7 +141,6 @@
 								</div>
 								<div class="clear"> </div>
 								<input type="submit" value="提交" onclick="userRegister()">
-						</form>
 					</div>
 		   </div>
 	  </div>
@@ -182,10 +178,8 @@
 						<ul class="footer_box">
 							<h4>Newsletter</h4>
 							<div class="footer_search">
-				    		   <form>
 				    			<input type="text" value="Enter your email" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Enter your email';}">
 				    			<input type="submit" value="Go">
-				    		   </form>
 					        </div>
 							<ul class="social">	
 							  <li class="facebook"><a href="#"><span> </span></a></li>
@@ -219,38 +213,45 @@
 		</div>
 </body>	
 <script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
 <script type="text/javascript">
 //用户注册方法
+var baseUrl=getRootPath_web();
+
 function userRegister(){
 	var user_name=$("#username").val();
 	var username_none=$("#username_none").val();
 	var email=$("#email").val();
 	var password=$("#password").val();
 	var repassword=$("#repassword").val();
-	alert(user_name);
-	if(password!=repassword){
+	if(user_name==null||user_name==""||username_none==null||username_none==""||email==null||email==""||password==null||password==""||repassword==null||repassword==""){
+		alert("请补全注册信息！");
+	}
+	else if(password!=repassword){
 		alert("两次密码输入不同");
 	}
-	$.ajax({
-		type:"post",
-		url:"http://localhost:8080/my_project/user/regist.action",
-		dataType:"json",
-		data : {
-			user_name:user_name,
-			nick_name:username_none,
-			email:email,
-			password:password
-			},
-		success: function(data){
-			if(data.code==1){
-				alert("注册成功");
-				window.parent.location.href='../my_project/front/login.html';
+	else{
+		$.ajax({
+			type:"post",
+			url:baseUrl+"/user/regist.action",
+			dataType:"json",
+			data : {
+				user_name:user_name,
+				nick_name:username_none,
+				email:email,
+				password:password
+				},
+			success: function(data){
+				if(data.code==1){
+					alert("注册成功");
+					window.parent.location.href=baseUrl+'/front/login.html';
+					}
+				else{
+					alert(data.message);
 				}
-			else{
-				alert(data.message);
-			}
-			}
-	})
+				}
+		})
+	}	
 }
 </script>
 </html>

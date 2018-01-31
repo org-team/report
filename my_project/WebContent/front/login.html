@@ -9,7 +9,6 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript">
@@ -141,7 +140,6 @@
 					<div class="login-title">
 						<h4 class="title">登录</h4>
 						<div id="loginbox" class="loginbox">
-							<form action="" method="post" name="login" id="login-form">
 								<fieldset class="input">
 									<p id="login-form-username">
 										<label for="modlgn_username">用户名</label> <input
@@ -162,7 +160,6 @@
 										<div class="clear"></div>
 									</div>
 								</fieldset>
-							</form>
 						</div>
 					</div>
 					<div class="clear"></div>
@@ -254,38 +251,39 @@
 	</div>
 </body>
 <script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
 <script type="text/javascript">
-
-
-
+var baseUrl=getRootPath_web();
 //用户登录方法
 function userlogin(){
 	var user_name=$("#modlgn_username").val();
 	var password=$("#modlgn_passwd").val();
-	if(user_name==null||password==null||user_name==""||password==""){
-		alert(请填写正确的用户名和密码);
+	if(user_name==null||user_name==""||password==null||password==""){
+	alert("用户名密码不能为空！");
 	}
-	$.ajax({
-		type:"post",
-		url:"http://localhost:8080/my_project/user/login.action",
-		dataType:"json",
-		data : {
-			user_name:user_name,
-			password:password
-			},
-		success: function(data){
-			alert(1);
-			alert(data.code);
-			if(data.code==1){
-				alert("登录成功");
-				window.parent.location.href='../my_project/front/index.html';
+	else{
+		$.ajax({
+			type:"post",
+			url:baseUrl+"/user/login.action",
+			dataType:"json",
+			data : {
+				user_name:user_name,
+				password:password
+				},
+			success: function(data){
+				var code=data.code;
+				var msg=data.message;
+				if(code==1){
+					alert("登录成功");
+					localStorage.token=data.data.user_id
+					window.parent.location.href=baseUrl+"/front/index.html";
+					}
+				else{
+					alert(msg);
 				}
-			else{
-				alert(data.message);
-			}
-			}
-	})
+				}
+		})
+	}	
 }
-
 </script>
 </html>
