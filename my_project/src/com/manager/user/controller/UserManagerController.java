@@ -1,15 +1,16 @@
 package com.manager.user.controller;
 
+import java.io.IOException;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.demo.common.controller.BaseController;
+import com.manager.common.controller.BaseController;
 import com.manager.user.po.UserDetail;
 import com.manager.user.service.UserManagerService;
 import com.utils.JsonUtil;
@@ -187,4 +188,88 @@ public class UserManagerController extends BaseController {
         this.send(response,msg);
     }
     
+    /**
+     * <p>Title: login</p>
+     * <p>Description:登录 </p>
+     * @param u
+     * @param response
+     * @param request
+     */
+    @RequestMapping("/login")
+    public void login(UserDetail u,HttpServletResponse response,HttpServletRequest request){
+    	Msg msg;
+    	
+        try {
+        	if(!TypeIsNull.typeIsNull(u.getUserName(),u.getPassword())){
+        		//参数异常
+                msg=new Msg(Msg.ERROR,Msg.ERROR_MSG);
+        	}else{
+        		u.setPassword(Md5Tools.MD5Encode(u.getPassword(),"utf-8",false));
+            	UserDetail userDetail=this.userManagerService.managerLogin(u);
+            	msg = new Msg(Msg.SUCCESS,"登录成功",userDetail.getUserId());
+            	request.getSession().setAttribute("user", userDetail);
+            	
+        	}
+
+        }catch (Exception e){
+            msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
+            logger.error("类-login-报错: " + e);
+        }
+        logger.error("类-login-返回-: " + JsonUtil.toJson(msg));
+        this.send(response,msg);	
+
+    }
+    
+    /**
+	 * 退出登录
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/logout")
+	public void logout(HttpServletRequest request, HttpServletResponse response){
+		Msg msg = new Msg();
+		try {
+			UserDetail u = (UserDetail) request.getSession().getAttribute("user");
+			if(u==null){
+				msg.setCode(Msg.FAIL);
+				msg.setMessage("没有登录");
+			}else{
+				request.getSession().removeAttribute("user");
+				msg.setCode(Msg.SUCCESS);
+				msg.setMessage("已经注销登录");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg.setCode(Msg.ERROR);
+			msg.setMessage("退出登录异常");
+		}
+		this.send(response, msg);
+	}
+	
+	/**
+	 * 获取用户登录状态，返回登录对象
+	 * @author ZhangYang
+	 * @dateTime 2017年7月31日 下午8:29:56
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/getLogger")
+	public void getLogginUser(HttpServletRequest request, HttpServletResponse response){
+		Msg msg = new Msg();
+		try {
+			UserDetail u = (UserDetail) request.getSession().getAttribute("user");
+			if(u==null){
+				msg.setCode(Msg.FAIL);
+				msg.setMessage("没有登录");
+			}else{
+				msg.setCode(Msg.SUCCESS);
+				msg.setData(u);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg.setCode(Msg.ERROR);
+			msg.setMessage("获取登录状态异常");
+		}
+		this.send(response, msg);
+	}
 }

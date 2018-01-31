@@ -55,4 +55,12 @@ public interface UserManagerMapper {
      * @return
      */
     List<Map<String, Object>> showRoleList();
+    
+    /**
+     * <p>Title: managerLogin</p>
+     * <p>Description:后台用户登录 </p>
+     * @param u
+     * @return
+     */
+    UserDetail managerLogin(UserDetail u);
 }

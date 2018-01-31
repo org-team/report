@@ -58,4 +58,12 @@ public interface UserManagerService {
      */
     Msg showRoleList();
     
+    /**
+     * <p>Title: managerLogin</p>
+     * <p>Description:后台用户登录 </p>
+     * @param u
+     * @return
+     */
+    UserDetail managerLogin(UserDetail u);
+    
 }

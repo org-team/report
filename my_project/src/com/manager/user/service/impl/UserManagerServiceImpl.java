@@ -129,4 +129,12 @@ public class UserManagerServiceImpl implements UserManagerService  {
 		msg=new Msg(Msg.SUCCESS,Msg.SUCCESS_MSG,lst);
 		return msg;
 	}
+
+	/**
+	 * 登录
+	 */
+	@Override
+	public UserDetail managerLogin(UserDetail u) {
+		return userManagerMapper.managerLogin(u);
+	}
 }
