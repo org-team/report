@@ -54,27 +54,6 @@ public abstract class BaseController {
 		}
 		return miManagerId;
 	}
-	
-	/**
-	 * 设置session
-	 * @Title: setManagerId  
-	 * @date 2017年10月26日   
-	 * @param request
-	 * @param managerId void
-	 * @throws
-	 */
-	protected String setManagerId(HttpServletRequest request ,String managerId){
-		String miManagerId = null;
-		try {
-			HttpSession session = request.getSession();
-			//miManagerId = MathUtil.encryptAsString(managerId,"jzcxxt@74521");
-			session.setAttribute("managerId",miManagerId);
-			System.out.println("setManagerId" + session.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return miManagerId;
-	}
 
 	/**
 	 * 获取登陆用户的IP地址
