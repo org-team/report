@@ -114,40 +114,36 @@
 	     <div class="container">
 						<form> 
 								<div class="register-top-grid">
-										<h3>PERSONAL INFORMATION</h3>
+										<h3>用户信息</h3>
 										<div>
-											<span>First Name<label>*</label></span>
-											<input type="text"> 
+											<span>用户名<label>*</label></span>
+											<input type="text" id="username"> 
 										</div>
 										<div>
-											<span>Last Name<label>*</label></span>
-											<input type="text"> 
+											<span>昵称<label>*</label></span>
+											<input type="text" id="username_none"> 
 										</div>
 										<div>
-											<span>Email Address<label>*</label></span>
-											<input type="text"> 
+											<span>电子邮箱<label>*</label></span>
+											<input type="text" id="email"> 
 										</div>
-										<div class="clear"> </div>
-											<a class="news-letter" href="#">
-												<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up for Newsletter</label>
-											</a>
-										<div class="clear"> </div>
+
 								</div>
 								<div class="clear"> </div>
 								<div class="register-bottom-grid">
-										<h3>LOGIN INFORMATION</h3>
+										<h3>登录信息</h3>
 										<div>
-											<span>Password<label>*</label></span>
-											<input type="text">
+											<span>密码<label>*</label></span>
+											<input type="text" id="password">
 										</div>
 										<div>
-											<span>Confirm Password<label>*</label></span>
-											<input type="text">
+											<span>确认密码<label>*</label></span>
+											<input type="text" id="repassword">
 										</div>
 										<div class="clear"> </div>
 								</div>
 								<div class="clear"> </div>
-								<input type="submit" value="submit">
+								<input type="submit" value="提交" onclick="userRegister()">
 						</form>
 					</div>
 		   </div>
@@ -222,4 +218,39 @@
 			</div>
 		</div>
 </body>	
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+//用户注册方法
+function userRegister(){
+	var user_name=$("#username").val();
+	var username_none=$("#username_none").val();
+	var email=$("#email").val();
+	var password=$("#password").val();
+	var repassword=$("#repassword").val();
+	alert(user_name);
+	if(password!=repassword){
+		alert("两次密码输入不同");
+	}
+	$.ajax({
+		type:"post",
+		url:"http://localhost:8080/my_project/user/regist.action",
+		dataType:"json",
+		data : {
+			user_name:user_name,
+			nick_name:username_none,
+			email:email,
+			password:password
+			},
+		success: function(data){
+			if(data.code==1){
+				alert("注册成功");
+				window.parent.location.href='../my_project/front/login.html';
+				}
+			else{
+				alert(data.message);
+			}
+			}
+	})
+}
+</script>
 </html>
