@@ -6,7 +6,11 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
-
+/**
+ * <p>Description:加密-解密-盐 </p>
+ * <p>Title: MathUtil.java</p>
+ * @date 2018年2月1日
+ */
 
 public class MathUtil {
   private static String COMMON_KEY = "emotte!@#game";

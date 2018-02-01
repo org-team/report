@@ -14,11 +14,9 @@ import com.google.gson.reflect.TypeToken;
 import net.sf.json.JSONObject;
 
 /**
- * @author: zhangKangChuang
  * package: com.utils
  * class_name: JsonUtil
  * describe: json map list String 互转
- * email: 996789881@qq.com
  * @data: 2017/12/26 0026 上午 10:47
  **/
 public class JsonUtil {

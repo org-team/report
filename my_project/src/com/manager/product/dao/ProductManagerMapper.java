@@ -1,7 +1,7 @@
-package com.manager.user.dao;
+package com.manager.product.dao;
 
-import com.manager.user.po.Product;
-import com.manager.user.po.Property;
+import com.manager.product.po.Product;
+import com.manager.product.po.Property;
 
 public interface ProductManagerMapper {
 	

@@ -12,7 +12,7 @@
 			(CASE P.SEX
 			WHEN '1' THEN '男'
 			WHEN '2' THEN '女'
-			ELSE '其他' END) SEX,
+			ELSE '' END) SEX,
 			P.EMAIL,
 			P.PHONE,
 			DATE_FORMAT(P.CREATE_TIME,'%Y-%m-%d %H:%i:%s') CREATE_TIME,

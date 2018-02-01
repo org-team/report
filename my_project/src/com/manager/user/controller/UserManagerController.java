@@ -1,7 +1,5 @@
 package com.manager.user.controller;
 
-import java.io.IOException;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package com.manager.user.po;
+package com.manager.product.po;
 
 import java.util.Date;
 

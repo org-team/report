@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.product.dao.KindManagerMapper">
+
+	<!-- 查询所有商品分类 -->	
+	<select id="selectKind__paging" resultType="Map" parameterType="com.manager.product.po.Kind">
+		SELECT c.kind_id,c.parent_kind,c.kind_name from t_yc_kind c 
+		<where> c.valid=1 and c.parent_kind !='0'
+	        <if test=" null != kindName and '' != kindName">  
+	            AND c.kind_name=#{kindName}
+	        </if>  
+	    </where> 
+	    ORDER BY c.create_time desc
+	</select>
+	
+	<!-- 添加分类 -->
+	<insert id="insertKind" parameterType="com.manager.product.po.Kind">
+		INSERT INTO t_yc_kind(kind_id,kind_name,parent_kind,verson,valid,create_time,update_time) 
+		VALUES (#{kindId},#{kindName},'-1',1,1,sysdate(),sysdate())
+	</insert>
+	<!-- 分类去重 -->
+	<select id="isExitKindName" resultType="int" parameterType="String">
+		SELECT count(1) kindNameTotal from t_yc_kind c WHERE c.kind_name=#{kindName} AND c.valid=1 AND c.parent_kind !='0'
+	</select>
+	
+	<update id="deleteKindName2id" parameterType="String">
+		UPDATE t_yc_kind c set c.valid=2 WHERE c.kind_id=#{kindId}
+	</update>
+	
+</mapper>
