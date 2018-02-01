@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.user.dao.UserMapper">
 	<!-- 在用户表插入数据 -->
-	<select id="insertUser" parameterType="User">
+	<select id="insertUser" parameterType="com.demo.user.po.User">
 		insert into t_yc_user 
 			(user_id,user_name,password) 
 		values 
@@ -10,7 +10,7 @@
 	</select>
 	
 	<!-- 在用户详情表插入数据 -->
-	<insert id="insertProfile" parameterType="User">  
+	<insert id="insertProfile" parameterType="com.demo.user.po.User">  
 	    insert into t_yc_profile 
 	    	(
 	    		user_id,
@@ -46,7 +46,7 @@
 	</insert> 
 	
 	<!-- 查询用户登录信息 -->
-	<select id="selectUser" resultType="User" parameterType="String">
+	<select id="selectUser" resultType="com.demo.user.po.User" parameterType="String">
 		select 
 			u.user_id,u.user_name,u.password 
 		from 
@@ -58,7 +58,7 @@
 	</select> 
 	
 	<!-- 查询用户详细信息 -->
-	<select id="selectProfile" resultType="User" parameterType="String">
+	<select id="selectProfile" resultType="com.demo.user.po.User" parameterType="String">
 		select 
 			p.user_id,p.nick_name,r.role_name,p.user_img,p.sex,p.age,p.address_id,p.address_detail,p.postcode,p.phone,p.email
 		from 
@@ -70,12 +70,12 @@
 	</select> 
 	
 	<!-- 修改密码 -->
-	<update id="updateUser" parameterType="User">
+	<update id="updateUser" parameterType="com.demo.user.po.User">
 		update t_yc_user set password = #{password} where user_id = #{user_id}
 	</update>
 	
 	<!-- 修改个人信息 -->
-	<update id="updateProfile" parameterType="User">
+	<update id="updateProfile" parameterType="com.demo.user.po.User">
 		update 
 			t_yc_profile
 		set 
