@@ -2,19 +2,20 @@ $(function(){
 	serviceList(1,15);
 });
 /**
- * 权限列表
+ * 产品列表
  */
 function serviceList(start,limit){
 	$("#role_List").empty();
 	$.ajax({
-        url : path + "/roleManager/selectUserInfo_paging.action",
+        url : path + "/product/selectProductInfoList.action",
         type :"POST",
         xhrFields: {
 	        withCredentials: true
 	    },
 	    data:{
 	    	curPage:start,
-			pageCount:limit
+			pageCount:limit,
+			productName:$("#productName").val()
 	    },
 	    dataType :"json",
         success : function (data) {
@@ -29,11 +30,16 @@ function serviceList(start,limit){
             	$.each(fly, function(i, item) {
             		num = i+1;
             		trHtml ="<tr onclick=\"showQualityDetail(this);\">"+
-        			"	<td><input name='rad' type='radio' value='"+item.role_id+"'></td>"+	
+        			"	<td><input name='rad' type='radio' value='"+item.product_id+"'></td>"+	
             		"	<td>"+(total + num - pageCount)+"</td>"+
-            		"	<td>"+(item.role_id?item.role_id:"--")+"</td>"+
-            		"	<td>"+(item.role_name?item.role_name:"--")+"</td>"+
-            		"	<td>"+(item.create_time?item.create_time:"--")+"</td>"+
+            		"	<td>"+(item.product_name?item.product_name:"--")+"</td>"+
+            		"	<td>"+(item.kind_name?item.kind_name:"--")+"</td>"+
+            		"	<td>"+(item.price_old?item.price_old:"--")+"</td>"+
+            		"	<td>"+(item.price_new?item.price_new:"--")+"</td>"+
+            		"	<td>"+(item.unit?item.unit:"--")+"</td>"+
+            		"	<td>"+(item.total?item.total:"--")+"</td>"+
+            		"	<td>"+(item.surplus?item.surplus:"--")+"</td>"+
+            		"	<td><a href='javascript:;' onclick=showProductDetail('"+item.product_id+"')>查看</a></td>"+
             		"</tr>";
             		var $t = $(trHtml);
             		$("#role_List").append($t);
@@ -45,6 +51,19 @@ function serviceList(start,limit){
         	}
         }
 	});
+}
+/**
+ * 查看商品详情
+ */
+function showProductDetail(productId){
+	alert(productId);
+}
+
+/**
+ * 条件查询
+ */
+function searchService(){
+	serviceList();
 }
 
 /**
@@ -73,7 +92,7 @@ $(document).on('click','#saves',function(){
 	    	productDescribe:$("#add_productDescribe").val(),
 	    	source: $('#add_source option:selected').val(),
 	    	model:$("#add_model").val(),
-	    	unit: $('#add_unit option:selected').val(),
+	    	unit: $('#add_unit option:selected').text(),
 	    	priceOld:$("#add_priceOld").val(),
 	    	kindId: $('#add_kindId option:selected').val(),
 	    	total:$("#add_total").val(),

@@ -1,5 +1,8 @@
 package com.manager.product.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
@@ -128,5 +131,29 @@ public class ProductManagerController extends BaseController {
         }
         logger.info("类-deleteKindName2id-返回-: " + JsonUtil.toJson(msg));
         this.send(response,msg);
+	}
+	
+	/**
+	 * <p>Title: selectProductInfoList</p>
+	 * <p>Description: 商品列表-分页</p>
+	 * @param productName
+	 * @param page
+	 * @param response
+	 */
+	@RequestMapping("/selectProductInfoList")
+	public void selectProductInfoList(String productName,Page page,HttpServletResponse response){
+		Msg msg;
+		try {
+			Map<String, Object> map=new HashMap<String, Object>();
+			map.put("productName", productName);
+			map.put("page", page);
+			msg=this.productManagerService.selectProductInfo_paging(map);
+        }catch (Exception e){
+            msg = new Msg(Msg.FAIL,Msg.FAIL_MSG);
+            logger.error("类-selectProductInfoList-报错: " + e);
+        }
+        logger.info("类-selectProductInfoList-返回-: " + JsonUtil.toJson(msg));
+        this.send(response,msg);
+		
 	}
 }

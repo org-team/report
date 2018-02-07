@@ -36,7 +36,20 @@
 								</div>
 							</header>
 							<div class="info-select clearfix dataTable-info">
-								
+								<form class="form-inline" id="crd_form_query">
+									
+									<div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+	                                    <label>
+	                                    	<p>商品名称： </p>
+	                                        <input class="form-control inputElem" type="text" name="" id="productName" >
+	                                    </label>
+	                                </div>
+	                                <div class="row">
+										<div class="col-xs-12">
+											<button type="button" class="btn btn-default btn-sm fr mr20" onclick="searchService()">查询</button>
+										</div>
+									</div>
+								</form>
 							</div>
 							
 							<div class="panel-heading panel-new">
@@ -59,7 +72,10 @@
 											<th>序号</th>
 											<th>商品名称</th>
 											<th>商品分类</th>
+											<th>原价格</th>
 											<th>现价格</th>
+											<th>最小单位</th>											
+											<th>库存总量</th>											
 											<th>库存剩余量</th>
 											<th>商品详情</th>
 										</tr>

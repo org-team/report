@@ -1,5 +1,8 @@
 package com.manager.product.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.manager.product.po.Product;
 import com.manager.product.po.Property;
 
@@ -20,4 +23,12 @@ public interface ProductManagerMapper {
 	 * @return
 	 */
 	int insertProduct_2(Property property);
+	
+	/**
+	 * <p>Title: selectProductInfo_paging</p>
+	 * <p>Description: 商品列表_分页</p>
+	 * @param productName
+	 * @return
+	 */
+	List<Map<String, Object>> selectProductInfo_paging(Map<String, Object> map);
 }

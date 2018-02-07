@@ -15,6 +15,7 @@ import com.manager.product.dao.KindManagerMapper;
 import com.manager.product.dao.ProductManagerMapper;
 import com.manager.product.service.ProductManagerService;
 import com.utils.Msg;
+import com.utils.Page;
 
 
 /**
@@ -78,6 +79,22 @@ public class ProductManagerServiceImpl implements ProductManagerService {
 			msg=new Msg(Msg.FAIL,"删除失败");
 		}
 		return msg;
+	}
+	@Override
+	public Msg selectProductInfo_paging(Map<String, Object> map) {
+		Msg msg;
+		List<Map<String, Object>> lst=this.productManagerMapper.selectProductInfo_paging(map);
+		
+		if(null==lst || lst.isEmpty()){
+            //查询无结果
+            msg=new Msg(Msg.NULL,Msg.NULL_MSG);
+        }else{
+        	Map<String, Object> map2=new HashMap<>();
+        	map2.put("lst", lst);
+        	map2.put("page", map.get("page"));
+            msg=new Msg(Msg.SUCCESS,Msg.SUCCESS_MSG,map2);
+        }
+        return msg;
 	}
 	
 	

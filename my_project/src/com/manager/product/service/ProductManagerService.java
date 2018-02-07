@@ -2,6 +2,8 @@ package com.manager.product.service;
 
 
 
+import java.util.Map;
+
 import com.manager.product.po.Kind;
 import com.manager.product.po.Product;
 import com.manager.product.po.Property;
@@ -42,4 +44,12 @@ public interface ProductManagerService {
 	 * @return
 	 */
 	Msg deleteKindName2id(String kindId);
+	
+	/**
+	 * <p>Title: selectProductInfo_paging</p>
+	 * <p>Description:商品列表_分页 </p>
+	 * @param map
+	 * @return
+	 */
+	Msg selectProductInfo_paging(Map<String, Object> map);
 }

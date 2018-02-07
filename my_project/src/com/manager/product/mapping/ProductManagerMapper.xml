@@ -35,5 +35,19 @@
 		VALUES
 			(#{productId},#{propertyId},#{property},#{model},#{priceOld},#{total},#{total},#{unit})		
 	</insert>
+	
+	<!-- 商品列表-分页 -->
+	<select id="selectProductInfo_paging" parameterType="Map" resultType="Map">
+		SELECT c.*,k.kind_name,t.discount_price,t.discount_rate,t.price_new,p.price_old,p.model,p.property,p.surplus,p.total,p.unit 
+		FROM t_yc_product c
+		LEFT JOIN t_yc_property p ON p.product_id=c.product_id
+		LEFT JOIN t_yc_discount t ON t.product_id=c.product_id
+		LEFT JOIN t_yc_kind k on k.kind_id=c.kind_id
+		<where> c.valid=1
+			<if test="null != productName and '' != productName">
+				and c.product_name=#{productName}
+			</if>
+		</where>		
+	</select>
 
 </mapper>
